@@ -1,0 +1,7 @@
+{
+  "dependencies": {
+    "flask": "^0.2.10",
+    "requests": "^0.3.0",
+    "torch": "^0.2.7"
+  }
+}
