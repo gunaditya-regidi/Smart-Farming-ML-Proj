@@ -1,4 +1,4 @@
-fertilizer_dic = {
+fertilizer_adv = {
         'NHigh': """The N value of soil is high and might give rise to weeds.
         <br/> Please consider the following suggestions:
 

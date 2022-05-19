@@ -29,7 +29,7 @@ class ResNet9(nn.Module):
                                        nn.Flatten(),
                                        nn.Linear(512, num_diseases))
         
-    def forward(self, xb): # xb is the loaded batch
+    def forward(self, xb): 
         out = self.conv1(xb)
         out = self.conv2(out)
         out = self.res1(out) + out
