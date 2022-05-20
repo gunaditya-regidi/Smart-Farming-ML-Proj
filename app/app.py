@@ -79,17 +79,14 @@ def read_in_and_split_data(data, target):
 
 df = pd.read_csv('Data/crop_recommendation.csv')
 
-# Remove Outliers
 Q1 = df.quantile(0)
 Q3 = df.quantile(1)
 IQR = Q3 - Q1
 df_out = df[~((df < (Q1 - 1.5 * IQR)) |(df > (Q3 + 1.5 * IQR))).any(axis=1)]
 
-# Split Data to Training and Validation set
 target ='label'
 X_train, X_test, y_train, y_test = read_in_and_split_data(df, target)
 
-# Train model
 pipeline = make_pipeline(StandardScaler(),RandomForestClassifier())
 model = pipeline.fit(X_train, y_train)
 y_pred_rf = model.predict(X_test)
