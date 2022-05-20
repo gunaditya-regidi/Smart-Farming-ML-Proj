@@ -77,7 +77,7 @@ def read_in_and_split_data(data, target):
     X_train, X_test, y_train, y_test = train_test_split(X,y,test_size=0.2, random_state=0)
     return X_train, X_test, y_train, y_test
 
-df = pd.read_csv('Crop_recommendation.csv')
+df = pd.read_csv('Data/crop_recommendation.csv')
 
 # Remove Outliers
 Q1 = df.quantile(0)
