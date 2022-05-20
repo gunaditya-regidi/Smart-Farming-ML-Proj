@@ -3,7 +3,6 @@
 from flask import Flask, render_template, request, Markup
 import numpy as np
 import pandas as pd
-from utils.disease import disease_dic
 from utils.fertilizer import fertilizer_adv
 import requests
 import config
@@ -113,6 +112,10 @@ crop_recommendation_model_path = 'models/RandomForest.pkl'
 crop_recommendation_model = pickle.load(
     open(crop_recommendation_model_path, 'rb'))
 
+
+yield_prediction_model_path = 'models/RandomForest.pkl'
+yield_prediction_model = pickle.load(
+    open(yield_prediction_model_path, 'rb'))
 
 
 def weather_fetch(city_name):
@@ -255,26 +258,6 @@ def yield_prediction():
             return render_template('try_again.html', title=title)
 
 
-@app.route('/disease-predict', methods=['GET', 'POST'])
-def disease_prediction():
-    title = 'Smart Farming - Yield Prediction'
-
-    if request.method == 'POST':
-        if 'file' not in request.files:
-            return redirect(request.url)
-        file = request.files.get('file')
-        if not file:
-            return render_template('disease.html', title=title)
-        try:
-            img = file.read()
-
-            prediction = predict_image(img)
-
-            prediction = Markup(str(disease_dic[prediction]))
-            return render_template('disease-result.html', prediction=prediction, title=title)
-        except:
-            pass
-    return render_template('disease.html', title=title)
 
 
 if __name__ == '__main__':
