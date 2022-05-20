@@ -64,11 +64,6 @@ disease_classes = ['Apple___Apple_scab',
                    'Tomato___Tomato_mosaic_virus',
                    'Tomato___healthy']
 
-disease_model_path = 'models/plant_disease_model.pth'
-disease_model = ResNet9(3, len(disease_classes))
-disease_model.load_state_dict(torch.load(
-    disease_model_path, map_location=torch.device('cpu')))
-disease_model.eval()
 
 
 def read_in_and_split_data(data, target):
@@ -142,25 +137,6 @@ def weather_fetch(city_name):
     else:
         return None
 
-
-def predict_image(img, model=disease_model):
-    """
-    Transforms image to tensor and predicts disease label
-    :params: image
-    :return: prediction (string)
-    """
-    transform = transforms.Compose([
-        transforms.Resize(256),
-        transforms.ToTensor(),
-    ])
-    image = Image.open(io.BytesIO(img))
-    img_t = transform(image)
-    img_u = torch.unsqueeze(img_t, 0)
-
-    yb = model(img_u)
-    _, preds = torch.max(yb, dim=1)
-    prediction = disease_classes[preds[0].item()]
-    return prediction
 
 
 
@@ -253,6 +229,30 @@ def fert_recommend():
     response = Markup(str(fertilizer_adv[key]))
 
     return render_template('fertilizer-result.html', recommendation=response, title=title)
+
+
+
+@ app.route('/yield-predict', methods=['POST'])
+def yield_prediction():
+    title = 'Smart Farming - Yield Prediction'
+
+    if request.method == 'POST':
+        
+        area = float(request.form['area'])
+        Crop = request.form.ge("crop")
+        state = request.form.ge("district")
+        city = request.form.get("city")
+        data = np.array([[area, Crop, state, city,]])
+
+        if data != None:
+            my_prediction = yield_prediction_model.predict(data)
+            final_prediction = my_prediction[0]
+
+            return render_template('yield-result.html', prediction=final_prediction, title=title)
+
+        else:
+
+            return render_template('try_again.html', title=title)
 
 
 @app.route('/disease-predict', methods=['GET', 'POST'])
