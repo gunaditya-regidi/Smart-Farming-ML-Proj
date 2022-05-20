@@ -13,6 +13,17 @@ import torch
 from torchvision import transforms
 from PIL import Image
 from utils.model import ResNet9
+from sklearn.metrics import matthews_corrcoef
+from sklearn.model_selection import train_test_split
+from sklearn.pipeline import make_pipeline
+from sklearn.preprocessing import StandardScaler
+from sklearn.linear_model import LogisticRegression
+from sklearn.naive_bayes import GaussianNB
+from sklearn.svm import SVC
+from sklearn.neighbors import KNeighborsClassifier
+from sklearn.tree import DecisionTreeClassifier
+
+from sklearn.ensemble import RandomForestClassifier
 
 disease_classes = ['Apple___Apple_scab',
                    'Apple___Black_rot',
@@ -60,6 +71,51 @@ disease_model.load_state_dict(torch.load(
 disease_model.eval()
 
 
+def read_in_and_split_data(data, target):
+    X = data.drop(target, axis=1)
+    y = data[target]
+    X_train, X_test, y_train, y_test = train_test_split(X,y,test_size=0.2, random_state=0)
+    return X_train, X_test, y_train, y_test
+
+df = pd.read_csv('Crop_recommendation.csv')
+
+# Remove Outliers
+Q1 = df.quantile(0)
+Q3 = df.quantile(1)
+IQR = Q3 - Q1
+df_out = df[~((df < (Q1 - 1.5 * IQR)) |(df > (Q3 + 1.5 * IQR))).any(axis=1)]
+
+# Split Data to Training and Validation set
+target ='label'
+X_train, X_test, y_train, y_test = read_in_and_split_data(df, target)
+
+# Train model
+pipeline = make_pipeline(StandardScaler(),RandomForestClassifier())
+model = pipeline.fit(X_train, y_train)
+y_pred_rf = model.predict(X_test)
+mcc_rf = matthews_corrcoef(X_test, y_pred_rf)
+# print (mcc_rf[0])
+
+pipeline1 = make_pipeline(StandardScaler(),DecisionTreeClassifier())
+model = pipeline1.fit(X_train, y_train)
+y_pred_dt = model.predict(X_test)
+mcc_dt = matthews_corrcoef(X_test, y_pred_dt)
+
+pipeline2 = make_pipeline(StandardScaler(),SVC())
+model = pipeline2.fit(X_train, y_train)
+y_pred_svm = model.predict(X_test)
+mcc_svm = matthews_corrcoef(X_test, y_pred_svm)
+
+
+pipeline4 = make_pipeline(StandardScaler(),GaussianNB())
+model = pipeline4.fit(X_train, y_train)
+y_pred_nb = model.predict(X_test)
+mcc_nb = matthews_corrcoef(X_test, y_pred_nb)
+
+pipeline5 = make_pipeline(StandardScaler(),KNeighborsClassifier())
+model = pipeline5.fit(X_train, y_train)
+y_pred_knn = model.predict(X_test)
+mcc_knn = matthews_corrcoef(X_test, y_pred_knn)
 
 crop_recommendation_model_path = 'models/RandomForest.pkl'
 crop_recommendation_model = pickle.load(
