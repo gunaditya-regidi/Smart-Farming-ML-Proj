@@ -149,7 +149,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 
 <body>
 
-	<nav class="navbar navbar-expand-lg navbar-dark bg-dark static-top" style="background-color: #a0ff91;">
+	<nav class="navbar navbar-expand-lg navbar-dark static-top" style="background-color: #a0ff91;">
 		<div class="container">
 			<a class="navbar-brand" href="{{ url_for('home') }}">
 				<img src="{{ url_for('static', filename='images/logo.jpg') }}" style="width: 90px; height: 55px" alt="">
@@ -160,19 +160,19 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 			</button>
 			<div class="collapse navbar-collapse" id="navbarResponsive">
 				<ul class="navbar-nav ml-auto">
-					<li class="nav-item active">
+					<li class="nav-item active" style="color: black;">
 						<a class="nav-link" href="{{ url_for('home') }}">Home
 							<span class="sr-only">(current)</span>
 						</a>
 					</li>
-					<li class="nav-item">
-						<a class="nav-link" href="{{ url_for('crop_recommend') }}">Crop</a>
+					<li class="nav-item" style="color: black;">
+						<a class="nav-link" href="{{ url_for('crop_recommend') }}">Crop Recommendation</a>
 					</li>
-					<li class="nav-item">
-						<a class="nav-link" href="{{ url_for('fertilizer_recommendation') }}">Fertilizer</a>
+					<li class="nav-item" style="color: black;">
+						<a class="nav-link" href="{{ url_for('fertilizer_recommendation') }}">Fertilizer Recommendation</a>
 					</li>
-					<li class="nav-item">
-						<a class="nav-link" href="{{ url_for('disease_prediction') }}">Disease</a>
+					<li class="nav-item" style="color: black;">
+						<a class="nav-link" href="{{ url_for('disease_prediction') }}">Yield Prediction</a>
 					</li>
 				</ul>
 			</div>
@@ -184,7 +184,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 
 	{% block body %} {% endblock %}
 
-	<footer class="text-center py-5">
+	<footer class="text-center py-5" style="background-color: rgba(50, 48, 48, 0.578);">
 		<div class="container py-md-3">
 			<h2 class="logo2 text-center">
 				<a href="{{ url_for('home') }}">
@@ -195,10 +195,9 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 				</p>
 			</div>
 			<div class="w3l-copy text-center">
-				<p class="text-da">A Farmer Freindly Web Application<br> </p>
+				<p style="color:white;">A Farmer Freindly Web Application<br> </p>
 			</div>
-			<p class="homelogo">
-			<p>Thanks for using our website.</p>
+			<p style="color:white;">Thanks for using our website.</p>
 			
 			
 		</div>
