@@ -93,29 +93,29 @@ X_train, X_test, y_train, y_test = read_in_and_split_data(df, target)
 pipeline = make_pipeline(StandardScaler(),RandomForestClassifier())
 model = pipeline.fit(X_train, y_train)
 y_pred_rf = model.predict(X_test)
-mcc_rf = matthews_corrcoef(X_test, y_pred_rf)
+# mcc_rf = matthews_corrcoef(X_test, y_pred_rf)
 # print (mcc_rf[0])
 
 pipeline1 = make_pipeline(StandardScaler(),DecisionTreeClassifier())
 model = pipeline1.fit(X_train, y_train)
 y_pred_dt = model.predict(X_test)
-mcc_dt = matthews_corrcoef(X_test, y_pred_dt)
+# mcc_dt = matthews_corrcoef(X_test, y_pred_dt)
 
 pipeline2 = make_pipeline(StandardScaler(),SVC())
 model = pipeline2.fit(X_train, y_train)
 y_pred_svm = model.predict(X_test)
-mcc_svm = matthews_corrcoef(X_test, y_pred_svm)
+# mcc_svm = matthews_corrcoef(X_test, y_pred_svm)
 
 
 pipeline4 = make_pipeline(StandardScaler(),GaussianNB())
 model = pipeline4.fit(X_train, y_train)
 y_pred_nb = model.predict(X_test)
-mcc_nb = matthews_corrcoef(X_test, y_pred_nb)
+# mcc_nb = matthews_corrcoef(X_test, y_pred_nb)
 
 pipeline5 = make_pipeline(StandardScaler(),KNeighborsClassifier())
 model = pipeline5.fit(X_train, y_train)
 y_pred_knn = model.predict(X_test)
-mcc_knn = matthews_corrcoef(X_test, y_pred_knn)
+# mcc_knn = matthews_corrcoef(X_test, y_pred_knn)
 
 crop_recommendation_model_path = 'models/RandomForest.pkl'
 crop_recommendation_model = pickle.load(
