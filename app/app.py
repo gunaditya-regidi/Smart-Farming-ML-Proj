@@ -84,8 +84,8 @@ X_train, X_test, y_train, y_test = read_in_and_split_data(df, target)
 pipeline = make_pipeline(StandardScaler(),RandomForestClassifier())
 model = pipeline.fit(X_train, y_train)
 y_pred_rf = model.predict(X_test)
-# mcc_rf = matthews_corrcoef(X_test, y_pred_rf)
-# print (mcc_rf[0])
+#mcc_rf = matthews_corrcoef(X_test, y_pred_rf)
+#print (mcc_rf[0])
 
 pipeline1 = make_pipeline(StandardScaler(),DecisionTreeClassifier())
 model = pipeline1.fit(X_train, y_train)
@@ -96,7 +96,6 @@ pipeline2 = make_pipeline(StandardScaler(),SVC())
 model = pipeline2.fit(X_train, y_train)
 y_pred_svm = model.predict(X_test)
 # mcc_svm = matthews_corrcoef(X_test, y_pred_svm)
-
 
 pipeline4 = make_pipeline(StandardScaler(),GaussianNB())
 model = pipeline4.fit(X_train, y_train)
