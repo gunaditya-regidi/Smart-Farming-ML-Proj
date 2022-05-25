@@ -234,7 +234,7 @@ def fert_recommend():
 
 
 
-@ app.route('/yield-predict', methods=['POST'])
+@ app.route('/disease-predict', methods=['POST'])
 def yield_prediction():
     title = 'Smart Farming - Yield Prediction'
 
@@ -250,7 +250,7 @@ def yield_prediction():
             my_prediction = yield_prediction_model.predict(data)
             final_prediction = my_prediction[0]
 
-            return render_template('yield-result.html', prediction=final_prediction, title=title)
+            return render_template('disease-result.html', prediction=final_prediction, title=title)
 
         else:
 
