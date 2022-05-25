@@ -164,6 +164,10 @@ def fertilizer_recommendation():
 
     return render_template('fertilizer.html', title=title)
 
+@ app.route('/yield-prediction')
+def yield_prediction():
+    title = 'Smart Farming - Yield Prediction'
+    return render_template('yield.html', title=title)
 
 
 @ app.route('/crop-predict', methods=['POST'])
@@ -236,7 +240,7 @@ def fert_recommend():
 
 
 @ app.route('/yield-predict', methods=['POST'])
-def yield_prediction():
+def yield_predict():
     title = 'Smart Farming - Yield Prediction'
 
     if request.method == 'POST':
