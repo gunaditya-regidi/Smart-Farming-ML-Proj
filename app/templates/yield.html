@@ -30,8 +30,21 @@
   <form method="POST" action="{{ url_for('yield_prediction') }}">
 
     <div class="form-group">
+      <label for="area" style="font-size: 17px"><b>Area</b></label>
+      <input
+        type="number"
+        class="form-control"
+        id="Nitrogen"
+        name="nitrogen"
+        placeholder="Enter the value (example:50)"
+        style="font-weight: bold"
+        required
+      />
+    </div>
+
+    <div class="form-group">
       <label for="crop" style="font-size: 17px"
-        ><b>Crop you want to grow</b></label
+        ><b>Crop</b></label
       >
       <select
         name="cropname"
@@ -90,6 +103,29 @@
       <script language="javascript">
         print_state("sts");
       </script>
+    </div>
+
+    <div class="form-group">
+      <label for="season" style="font-size: 17px"
+        ><b>Season</b></label
+      >
+      <select
+        name="cropname"
+        class="form-control"
+        id="crop"
+        placeholder="Select a crop"
+        style="font-weight: bold"
+        required
+      >
+        <option selected>Select Season</option>
+        <option>Kharif</option>
+        <option>Rabi</option>
+        <option>Zaid</option>
+        <option>Summer</option>
+        <option>Winter</option>
+        <option>Autumn</option>
+        <option>Whole Year</option>
+      </select>
     </div>
 
     <div class="d-flex justify-content-center">

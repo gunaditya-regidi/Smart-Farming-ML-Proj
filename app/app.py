@@ -9,6 +9,18 @@ import config
 import pickle
 import io
 import torch
+import matplotlib.pyplot as plt
+
+from sklearn import preprocessing
+from sklearn.preprocessing import OneHotEncoder
+from sklearn.compose import ColumnTransformer
+from sklearn.ensemble import RandomForestRegressor
+from sklearn.metrics import mean_absolute_error
+from sklearn.linear_model import Lasso
+from sklearn.linear_model import LinearRegression
+from sklearn.svm import SVR
+from sklearn import metrics
+from sklearn import utils
 from torchvision import transforms
 from PIL import Image
 from utils.model import ResNet9
@@ -246,9 +258,10 @@ def yield_predict():
     if request.method == 'POST':
         
         area = float(request.form['area'])
-        Crop = request.form.ge("crop")
-        state = request.form.ge("district")
+        Crop = request.form.get("crop")
+        state = request.form.get("district")
         city = request.form.get("city")
+        season = request.form.get('season')
         data = np.array([[area, Crop, state, city,]])
 
         if data != None:
