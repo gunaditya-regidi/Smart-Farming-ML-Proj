@@ -36,98 +36,11 @@ from sklearn.tree import DecisionTreeClassifier
 
 from sklearn.ensemble import RandomForestClassifier
 
-disease_classes = ['Apple___Apple_scab',
-                   'Apple___Black_rot',
-                   'Apple___Cedar_apple_rust',
-                   'Apple___healthy',
-                   'Blueberry___healthy',
-                   'Cherry_(including_sour)___Powdery_mildew',
-                   'Cherry_(including_sour)___healthy',
-                   'Corn_(maize)___Cercospora_leaf_spot Gray_leaf_spot',
-                   'Corn_(maize)___Common_rust_',
-                   'Corn_(maize)___Northern_Leaf_Blight',
-                   'Corn_(maize)___healthy',
-                   'Grape___Black_rot',
-                   'Grape___Esca_(Black_Measles)',
-                   'Grape___Leaf_blight_(Isariopsis_Leaf_Spot)',
-                   'Grape___healthy',
-                   'Orange___Haunglongbing_(Citrus_greening)',
-                   'Peach___Bacterial_spot',
-                   'Peach___healthy',
-                   'Pepper,_bell___Bacterial_spot',
-                   'Pepper,_bell___healthy',
-                   'Potato___Early_blight',
-                   'Potato___Late_blight',
-                   'Potato___healthy',
-                   'Raspberry___healthy',
-                   'Soybean___healthy',
-                   'Squash___Powdery_mildew',
-                   'Strawberry___Leaf_scorch',
-                   'Strawberry___healthy',
-                   'Tomato___Bacterial_spot',
-                   'Tomato___Early_blight',
-                   'Tomato___Late_blight',
-                   'Tomato___Leaf_Mold',
-                   'Tomato___Septoria_leaf_spot',
-                   'Tomato___Spider_mites Two-spotted_spider_mite',
-                   'Tomato___Target_Spot',
-                   'Tomato___Tomato_Yellow_Leaf_Curl_Virus',
-                   'Tomato___Tomato_mosaic_virus',
-                   'Tomato___healthy']
 
-
-
-def read_in_and_split_data(data, target):
-    X = data.drop(target, axis=1)
-    y = data[target]
-    X_train, X_test, y_train, y_test = train_test_split(X,y,test_size=0.2, random_state=0)
-    return X_train, X_test, y_train, y_test
-
-df = pd.read_csv('Data/crop_recommendation.csv')
-
-Q1 = df.quantile(0)
-Q3 = df.quantile(1)
-IQR = Q3 - Q1
-df_out = df[~((df < (Q1 - 1.5 * IQR)) |(df > (Q3 + 1.5 * IQR))).any(axis=1)]
-
-target ='label'
-X_train, X_test, y_train, y_test = read_in_and_split_data(df, target)
-
-pipeline = make_pipeline(StandardScaler(),RandomForestClassifier())
-model = pipeline.fit(X_train, y_train)
-y_pred_rf = model.predict(X_test)
-# mcc_rf = matthews_corrcoef(X_test, y_pred_rf)
-# print (mcc_rf[0])
-
-pipeline1 = make_pipeline(StandardScaler(),DecisionTreeClassifier())
-model = pipeline1.fit(X_train, y_train)
-y_pred_dt = model.predict(X_test)
-# mcc_dt = matthews_corrcoef(X_test, y_pred_dt)
-
-pipeline2 = make_pipeline(StandardScaler(),SVC())
-model = pipeline2.fit(X_train, y_train)
-y_pred_svm = model.predict(X_test)
-# mcc_svm = matthews_corrcoef(X_test, y_pred_svm)
-
-
-pipeline4 = make_pipeline(StandardScaler(),GaussianNB())
-model = pipeline4.fit(X_train, y_train)
-y_pred_nb = model.predict(X_test)
-# mcc_nb = matthews_corrcoef(X_test, y_pred_nb)
-
-pipeline5 = make_pipeline(StandardScaler(),KNeighborsClassifier())
-model = pipeline5.fit(X_train, y_train)
-y_pred_knn = model.predict(X_test)
-# mcc_knn = matthews_corrcoef(X_test, y_pred_knn)
 
 crop_recommendation_model_path = 'models/RandomForest.pkl'
 crop_recommendation_model = pickle.load(
     open(crop_recommendation_model_path, 'rb'))
-
-
-yield_prediction_model_path = 'models/RandomForest.pkl'
-yield_prediction_model = pickle.load(
-    open(yield_prediction_model_path, 'rb'))
 
 
 def weather_fetch(city_name):
@@ -192,9 +105,7 @@ def crop_prediction():
         K = int(request.form['pottasium'])
         ph = float(request.form['ph'])
         rainfall = float(request.form['rainfall'])
-
         city = request.form.get("city")
-
         if weather_fetch(city) != None:
             temperature, humidity = weather_fetch(city)
             data = np.array([[N, P, K, temperature, humidity, ph, rainfall]])
@@ -251,6 +162,23 @@ def fert_recommend():
 
 
 
+def read_in_and_split_data(data, target):
+    X = data.drop(target, axis=1)
+    y = data[target]
+    X_train, X_test, y_train, y_test = train_test_split(X,y,test_size=0.2, random_state=0)
+    return X_train, X_test, y_train, y_test
+
+
+df = pd.read_csv('Data/crop_production.csv')
+
+Q1 = df.quantile(0)
+Q3 = df.quantile(1)
+IQR = Q3 - Q1
+df_out = df[~((df < (Q1 - 1.5 * IQR)) |(df > (Q3 + 1.5 * IQR))).any(axis=1)]
+
+target ='Production'
+X_train, X_test, y_train, y_test = read_in_and_split_data(df, target)
+
 @ app.route('/yield-predict', methods=['POST'])
 def yield_predict():
     title = 'Smart Farming - Yield Prediction'
@@ -259,13 +187,16 @@ def yield_predict():
         
         area = float(request.form['area'])
         Crop = request.form.get("crop")
-        state = request.form.get("district")
+        state = request.form.get("state")
+        year = float(request.form['year'])
         city = request.form.get("city")
         season = request.form.get('season')
-        data = np.array([[area, Crop, state, city,]])
+        data = np.array([[state, city, year, season, Crop, area]])
 
         if data != None:
-            my_prediction = yield_prediction_model.predict(data)
+            from sklearn.svm import SVR
+            svr=SVR(kernel='poly',epsilon=1.0)
+            my_prediction = svr.predict(data)
             final_prediction = my_prediction[0]
 
             return render_template('yield-result.html', y_prediction=final_prediction, title=title)
