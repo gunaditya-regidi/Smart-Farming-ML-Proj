@@ -9,32 +9,9 @@ import config
 import pickle
 import io
 import torch
-import matplotlib.pyplot as plt
 
-from sklearn import preprocessing
-from sklearn.preprocessing import OneHotEncoder
-from sklearn.compose import ColumnTransformer
-from sklearn.ensemble import RandomForestRegressor
-from sklearn.metrics import mean_absolute_error
-from sklearn.linear_model import Lasso
-from sklearn.linear_model import LinearRegression
-from sklearn.svm import SVR
-from sklearn import metrics
-from sklearn import utils
 from torchvision import transforms
-from PIL import Image
-from utils.model import ResNet9
-from sklearn.metrics import matthews_corrcoef
 from sklearn.model_selection import train_test_split
-from sklearn.pipeline import make_pipeline
-from sklearn.preprocessing import StandardScaler
-from sklearn.linear_model import LogisticRegression
-from sklearn.naive_bayes import GaussianNB
-from sklearn.svm import SVC
-from sklearn.neighbors import KNeighborsClassifier
-from sklearn.tree import DecisionTreeClassifier
-
-from sklearn.ensemble import RandomForestClassifier
 
 
 
