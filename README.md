@@ -1,5 +1,5 @@
 
-## MOTIVATION 💪
+## Smart Farming Using ML
 - Farming is one of the major sectors that influences a country’s economic growth. 
 
 - In country like India, majority of the population is dependent on agriculture for their livelihood. Many new technologies, such as Machine Learning and Deep Learning, are being implemented into agriculture so that it is easier for farmers to grow and maximize their yield. 
@@ -112,9 +112,9 @@ You can use this project for further developing it and adding your work in it. I
 ## Further Improvements 📈
 This was my first big project so there are lot of things to improve upon
 
-- CSS code is totally messed up :pensive: (some code in file and some inline)
-- Frontend can be made more nicer (PS: I suck at frontend development) :cry:	
-- More data can be collected manually via web scrapping to make the system more accurate :monocle_face:	
-- Additional plant images can be collected to make the disease detection part more robust and generalized :face_with_head_bandage:
+- CSS code can be improved.
+- Frontend can be made more nicer.	
+- More data can be collected manually via web scrapping to make the system more accurate :monocle_face:
 - Modularized code can be written instead of writing in Jupyter Notebooks (will follow this in upcoming projects)
 - Chat bot can be used for more interactioni for farmer.
+- Geo Location Based data can be taken for accurate soil data.
