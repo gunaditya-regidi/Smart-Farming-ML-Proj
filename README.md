@@ -42,32 +42,12 @@ Note: When you enter the city name, make sure to enter mostly common city names.
 
 - Fertilizer suggestion system ==> Enter the nutrient contents of your soil and the crop you want to grow. The algorithm will tell which nutrient the soil has excess of or lacks. Accordingly, it will give suggestions for buying fertilizers.
 
-- Disease Detection System ==> Upload an image of leaf of your plant. The algorithm will tell the crop type and whether it is diseased or healthy. If it is diseased, it will tell you the cause of the disease and suggest you how to prevent/cure the disease accordingly.
-Note that, for now it only supports following crops
+- Yield Prediction System ==>Enter the values into the Webpage and select predict button, upon which the yield for the recommended crop will be shown to the user.
 
-<details>
-  <summary>Supported crops
-</summary>
-
-- Apple
-- Blueberry
-- Cherry
-- Corn
-- Grape
-- Pepper
-- Orange
-- Peach
-- Potato
-- Soybean
-- Strawberry
-- Tomato
-- Squash
-- Raspberry
-</details>
 
 ## How to run locally 🛠️
 - Before the following steps make sure you have [git](https://git-scm.com/download), [Anaconda](https://www.anaconda.com/) or [miniconda](https://docs.conda.io/en/latest/miniconda.html) installed on your system
-- Clone the complete project with `git clone https://github.com/Gladiator07/Harvestify.git` or you can just download the code and unzip it
+- Clone the complete project with `git clone https://github.com/Aditya-Bhushan-001/Smart-Farming-ML-Proj.git` or you can just download the code and unzip it
 - **Note:** The master branch doesn't have the updated code used for deployment, to download the updated code used for deployment you can use the following command
   ```
   ❯ git clone -b deploy https://github.com/Aditya-Bhushan-001/Smart-Farming-ML-Proj.git 
