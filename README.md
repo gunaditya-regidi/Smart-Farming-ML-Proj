@@ -81,20 +81,13 @@ if __name__ == '__main__':
     app.run(debug=False)
     
 ```
-## DEMO
 
-##comming soon
-
-
-## Usage ⚙️
-You can use this project for further developing it and adding your work in it. If you use this project, kindly mention the original source of the project and mention the link of this repo in your report.
-
-## Further Improvements 📈
+## Further Improvements
 This was my first big project so there are lot of things to improve upon
 
 - CSS code can be improved.
 - Frontend can be made more nicer.	
-- More data can be collected manually via web scrapping to make the system more accurate :monocle_face:
+- More data can be collected manually via web scrapping to make the system more accurate
 - Modularized code can be written instead of writing in Jupyter Notebooks (will follow this in upcoming projects)
 - Chat bot can be used for more interactioni for farmer.
 - Geo Location Based data can be taken for accurate soil data.
