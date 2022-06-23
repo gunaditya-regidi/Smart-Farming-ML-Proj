@@ -10,11 +10,7 @@
     
     - For the fertilizer recommendation application, the user can input the soil data and the type of crop they are growing, and the application will predict what the soil lacks or has excess of and will recommend improvements. 
     
-    - 
-
-## DATA SOURCE 📊
-- [Crop recommendation dataset ](https://www.kaggle.com/atharvaingle/crop-recommendation-dataset) (custom built dataset)
-- [Fertilizer suggestion dataset](https://github.com/Gladiator07/Harvestify/blob/master/Data-processed/fertilizer.csv) (custom built dataset)
+    - In Yield Production System the Production of the yield for crop will be predicted.
 
 
 # Built with 🛠️
@@ -32,8 +28,6 @@
 <code><img height="30" src="https://matplotlib.org/_static/logo2.svg"></code>
 <code><img height="30" src="https://upload.wikimedia.org/wikipedia/commons/thumb/0/05/Scikit_learn_logo_small.svg/1280px-Scikit_learn_logo_small.svg.png"></code>
 <code><img height="30" src="https://raw.githubusercontent.com/pytorch/pytorch/39fa0b5d0a3b966a50dcd90b26e6c36942705d6d/docs/source/_static/img/pytorch-logo-dark.svg"></code>
-
-## DEPLOYMENT 🚀
 
 
 ## How to use 💻
@@ -85,9 +79,7 @@ if __name__ == '__main__':
 ## Further Improvements
 This was my first big project so there are lot of things to improve upon
 
-- CSS code can be improved.
-- Frontend can be made more nicer.	
 - More data can be collected manually via web scrapping to make the system more accurate
-- Modularized code can be written instead of writing in Jupyter Notebooks (will follow this in upcoming projects)
 - Chat bot can be used for more interactioni for farmer.
 - Geo Location Based data can be taken for accurate soil data.
+- Market Price for Yield Production can be determined using real time Market Price Prediction Dataset.
